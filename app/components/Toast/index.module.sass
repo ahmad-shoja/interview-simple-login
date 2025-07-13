@@ -1,0 +1,36 @@
+.toast
+  font-family: inherit
+  border-radius: 8px
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15)
+  backdrop-filter: blur(8px)
+  border: 1px solid rgba(255, 255, 255, 0.1)
+  transition: all 0.2s ease-in-out
+
+  &:hover
+    transform: translateY(-1px)
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2)
+
+  // Success toast
+  &[data-type="success"]
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%)
+    border-color: #059669
+
+  // Error toast
+  &[data-type="error"]
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%)
+    border-color: #dc2626
+
+  // Warning toast
+  &[data-type="warning"]
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%)
+    border-color: #d97706
+
+  // Info toast
+  &[data-type="info"]
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)
+    border-color: #2563eb
+
+  // Loading toast
+  &[data-type="loading"]
+    background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%)
+    border-color: #4b5563 

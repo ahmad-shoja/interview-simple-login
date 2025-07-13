@@ -3,11 +3,13 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { toast } from "../components/Toast";
 import Card from "../components/card";
 import TextInput from "../components/input";
 import Button from "../components/button";
 import styles from "./page.module.sass";
-
+import { useUser } from "../hooks/useUser";
+import { useRouter } from "next/navigation";
 // Yup validation schema
 const loginSchema = yup
   .object({
@@ -30,16 +32,19 @@ export default function Page() {
     resolver: yupResolver(loginSchema),
   });
 
+  const router = useRouter();
   const phoneNumber = watch("phoneNumber");
+  const { login } = useUser();
 
-  const onSubmit = async (data: LoginFormData) => {
+  const onSubmit = async () => {
     try {
-      console.log("Form submitted:", data);
-      // Here you would typically make an API call to authenticate
-      // For now, we'll just log the data
-      alert(`Login attempt with phone: ${data.phoneNumber}`);
+      await login().then((user) => {
+        toast.success(`Welcome ${user.name.first}`);
+        router.push("/");
+      });
     } catch (error) {
       console.error("Login error:", error);
+      toast.error("Login failed. Please try again.");
     }
   };
 
